@@ -1,0 +1,219 @@
+:root {
+  color-scheme: dark;
+  --bg-gradient-top: #040414;
+  --bg-gradient-bottom: #031a2a;
+  --accent: #4ac1ff;
+  --accent-soft: rgba(74, 193, 255, 0.25);
+  --panel: rgba(15, 36, 61, 0.7);
+  --text: #eef8ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+  font-family: "Space Grotesk", "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: linear-gradient(180deg, var(--bg-gradient-top), var(--bg-gradient-bottom));
+  color: var(--text);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+main {
+  width: min(1120px, 100%);
+  display: grid;
+  gap: 3rem;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  margin: 0;
+  font-weight: 600;
+}
+
+p {
+  margin: 0;
+  line-height: 1.7;
+  font-size: 1.05rem;
+  color: rgba(238, 248, 255, 0.8);
+}
+
+.hero {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.canvasWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 24px;
+  background: radial-gradient(circle at top, rgba(70, 182, 255, 0.22), transparent 55%),
+    radial-gradient(circle at center, rgba(0, 129, 255, 0.18), transparent 60%),
+    rgba(255, 255, 255, 0.02);
+  padding: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.canvasWrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(74, 193, 255, 0.12), transparent 45%, rgba(74, 193, 255, 0.08));
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.infoCard {
+  background: var(--panel);
+  padding: 2rem;
+  border-radius: 20px;
+  display: grid;
+  gap: 1.2rem;
+  box-shadow: 0 18px 40px rgba(5, 12, 30, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.infoItem {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.infoLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(180, 225, 255, 0.65);
+}
+
+.infoValue {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-12px) translateX(6px);
+  }
+}
+
+@keyframes sunPulse {
+  0%,
+  100% {
+    transform: scale(0.98);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes solarGlow {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+.canvasInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.sceneLayer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sun {
+  position: absolute;
+  top: 12%;
+  left: 18%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.92), rgba(74, 193, 255, 0.7) 55%, rgba(5, 22, 44, 0));
+  filter: blur(0.8px);
+  animation: sunPulse 6s ease-in-out infinite;
+}
+
+.sun::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(74, 193, 255, 0.45), rgba(74, 193, 255, 0));
+  animation: solarGlow 5s ease-in-out infinite;
+}
+
+.cloud {
+  position: absolute;
+  width: 220px;
+  height: 120px;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0));
+  filter: blur(18px);
+  opacity: 0.6;
+}
+
+.cloud.one {
+  top: 28%;
+  right: 12%;
+  animation: drift 18s ease-in-out infinite;
+}
+
+.cloud.two {
+  bottom: 18%;
+  left: 10%;
+  animation: drift 22s ease-in-out infinite;
+}
+
+.cloud.three {
+  top: 60%;
+  right: 28%;
+  animation: drift 26s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 1.5rem;
+  }
+
+  .canvasWrapper {
+    border-radius: 20px;
+  }
+
+  .infoCard {
+    padding: 1.5rem;
+  }
+}
